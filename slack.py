@@ -58,10 +58,10 @@ class CallbackModule(object):
         self.username = os.getenv('SLACK_FROM', 'ansible')
         self.allow_notify = (os.getenv('SLACK_NOTIFY') != 'false')
 
-        if self.secret is None:
+        if self.token is None:
             self.disabled = True
-            utils.warning('Slack secret could not be loaded. The Slack '
-                          'secret can be provided using the `SLACK_SECRET` '
+            utils.warning('Slack token could not be loaded. The Slack '
+                          'token can be provided using the `SLACK_TOKEN` '
                           'environment variable.')
 
         self.printed_playbook = False
