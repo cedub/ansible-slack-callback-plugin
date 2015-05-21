@@ -19,7 +19,7 @@
 # along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import urllib
+import json
 import urllib2
 
 from ansible import utils
@@ -78,7 +78,9 @@ class CallbackModule(object):
 
         url = ('%s%s' % (self.msg_uri, self.token))
         try:
-            response = urllib2.urlopen(url, urllib.urlencode(params))
+            data = json.dumps(params)
+            req = urllib2.Request(url, data)
+            response = urllib2.urlopen(req)
             return response.read()
         except:
             utils.warning('Could not submit message to Slack')
